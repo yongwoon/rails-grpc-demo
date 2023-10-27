@@ -30,8 +30,4 @@ docker-compose build --no-cache
     docker-compose up
     ```
 
-  - Rails Container にアクセス
-
-    ```bash
-    docker-compose exec backend bash
-    ```
+- access to http://localhost:3000
