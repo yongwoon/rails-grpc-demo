@@ -1,10 +1,10 @@
 version: "3"
 services:
   backend:
-    container_name: dev_rails_backend
+    container_name: rails_grpc_demo_backend
     build:
       context: ./backend/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     environment:
       DATABASE_HOST: "db"
       DATABASE_USERNAME: root
@@ -13,24 +13,24 @@ services:
     tty: true
     volumes:
       - ./backend:/var/www/app
-      - dev_rails_backend_bundle_volume:/usr/local/bundle
+      - rails_grpc_demo_backend_bundle_volume:/usr/local/bundle
     ports:
       - "3000:3000"
     links:
       - db
     networks:
-      - dev_rails_network
+      - rails_grpc_demo_network
   redis:
-    container_name: dev_rails_redis
+    container_name: rails_grpc_demo_redis
     image: redis:6.2.7-alpine
     expose:
       - 6379
     volumes:
-      - dev_rails_redis_volume:/data
+      - rails_grpc_demo_redis_volume:/data
     networks:
-      - dev_rails_network
+      - rails_grpc_demo_network
   db:
-    container_name: dev_rails_db
+    container_name: rails_grpc_demo_db
     image: mysql:8.0.33
     command: >
       mysqld
@@ -40,14 +40,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - dev_rails_db_volume:/var/lib/mysql
+      - rails_grpc_demo_db_volume:/var/lib/mysql
     networks:
-      - dev_rails_network
+      - rails_grpc_demo_network
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 volumes:
-  dev_rails_backend_bundle_volume:
-  dev_rails_db_volume:
-  dev_rails_redis_volume:
+  rails_grpc_demo_backend_bundle_volume:
+  rails_grpc_demo_db_volume:
+  rails_grpc_demo_redis_volume:
 networks:
-  dev_rails_network:
+  rails_grpc_demo_network:
