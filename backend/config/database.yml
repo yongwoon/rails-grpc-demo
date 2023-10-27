@@ -15,18 +15,18 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  host: localhost
+  host: db
 
 development:
   <<: *default
-  database: tutorial_project_development
+  database: rails_grpc_demo_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: tutorial_project_test
+  database: rails_grpc_demo_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: tutorial_project_production
+  database: rails_grpc_demo_production
   username: tutorial_project
-  password: <%= ENV["TUTORIAL_PROJECT_DATABASE_PASSWORD"] %>
+  password: <%= ENV["rails_grpc_demo_DATABASE_PASSWORD"] %>
